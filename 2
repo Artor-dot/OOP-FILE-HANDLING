@@ -1,0 +1,42 @@
+import java.io.*;
+import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
+
+public class Main {
+    public static void main(String[] args) {
+        new File("letters").mkdir();
+        new File("numbers").mkdir();
+        Scanner sc = new Scanner(System.in);
+        String lets = "", numbs = "";
+        List<Character> letters = new ArrayList<>();
+        List<Character> numbers = new ArrayList<>();
+        while(true) {
+            System.out.print("Enter a character: ");
+            char res = sc.nextLine().charAt(0);
+            if(Character.isDigit(res)) {
+                numbers.add(res);
+            } else if (Character.isAlphabetic(res)) {
+                letters.add(res);
+            } else {
+                break;
+            }
+        }
+        try (BufferedWriter bw_let = new BufferedWriter(new FileWriter("letters/inputted.txt"))) {
+            for(char ch : letters) {
+                bw_let.write(ch);
+                bw_let.newLine();
+            }
+        } catch (IOException e) {
+            System.out.println("File error");
+        }
+        try (BufferedWriter bw_num = new BufferedWriter(new FileWriter("numbers/inputted.txt"))) {
+            for(char ch : numbers) {
+                bw_num.write(ch);
+                bw_num.newLine();
+            }
+        } catch (IOException e) {
+            System.out.println("File error");
+        }
+    }
+}

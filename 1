@@ -1,0 +1,29 @@
+import java.io.*;
+import java.util.Scanner;
+import java.util.ArrayList;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter the number of names: ");
+        int n = sc.nextInt();
+        sc.nextLine();
+        ArrayList<String> list = new ArrayList<>();
+        
+        try {
+            BufferedWriter bw = new BufferedWriter(new FileWriter("people.txt"));
+            for(int i = 1; i <= n; i++) {
+                System.out.print("Enter name " + i + ": ");
+                String name = sc.nextLine();
+                if(!list.contains(name)) {
+                    bw.write(name);
+                    bw.newLine();
+                    list.add(name);
+                }
+            }
+            bw.close();
+        } catch (IOException e) {
+            System.out.println("Error while writing");
+        }
+    }
+}
